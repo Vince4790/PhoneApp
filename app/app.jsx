@@ -7,6 +7,8 @@ var PhoneBookApp = require('PhoneBookApp');
 var actions = require('actions');
 var store = require('configureStore').configure();
 var ContactAPI = require('ContactAPI');
+const bootstrap = require('bootstrap');
+require('bootstrap/dist/css/bootstrap.css');
 
 
 // Load foundation

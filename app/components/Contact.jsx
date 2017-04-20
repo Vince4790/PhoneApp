@@ -14,13 +14,15 @@ var Contact = React.createClass({
   render: function(){
     var {name, number, checked} = this.props;
     return (
-      <div>
-        <div>
-          <input type="checkbox" checked={checked} onClick={this.toggleCheck}/>
-        </div>
-        <div>
-          <h3>{name} {number}</h3>
-          <button onClick={this.handleDelete}>Remove</button>
+      <div className="container">
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <label>
+            <input type="checkbox" checked={checked} onClick={this.toggleCheck}/>
+            <h3>{name} {number}</h3>
+            <a href="#" data-toggle="tooltip" title="Remove" onClick={this.handleDelete}>Remove</a>
+            </label>
+          </div>
         </div>
       </div>
     )

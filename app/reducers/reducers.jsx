@@ -1,3 +1,4 @@
+var uuid = require('node-uuid');
 export var searchTextReducer = (state = '', action) => {
   switch (action.type){
     case 'SET_SEARCH_TEXT':
@@ -22,9 +23,10 @@ export var contactsReducer = (state = [], action) => {
       return [
         ...state,
         {
-          id: 3,
+          id: uuid(),
           name: action.contact.name,
-          number: action.contact.number
+          number: action.contact.number,
+          checkd: false
         }
       ];
     case 'REMOVE_ALL':
