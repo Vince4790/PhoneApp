@@ -8,6 +8,28 @@ export var searchTextReducer = (state = '', action) => {
   };
 };
 
+export var modalFormReducer = (state = {}, action) => {
+  switch (action.type){
+    case 'OPEN_MODAL':
+     return action.modalForm;
+    default:
+      return state;
+  };
+};
+
+export var authReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'LOGIN':
+      return {
+        uid: action.uid
+      };
+    case 'LOGOUT':
+      return {};
+    default:
+      return state;
+  }
+};
+
 export var contactsReducer = (state = [], action) => {
   switch (action.type){
     case 'ADD_CONTACTS':
@@ -26,11 +48,23 @@ export var contactsReducer = (state = [], action) => {
           id: uuid(),
           name: action.contact.name,
           number: action.contact.number,
-          checkd: false
+          checked: false
         }
       ];
     case 'REMOVE_ALL':
       return [];
+    case 'UPDATE_CONTACT': {
+      console.log('Inside reducer',action.contact);
+      return state.map((contact) => {
+        if (contact.id === action.contact.id){
+          return {
+            ...action.contact
+          }
+        } else {
+          return contact;
+        }
+      });
+    }
     case 'REMOVE_SELECTED':
       return state.filter((contact) => {
         return !contact.checked;
@@ -48,6 +82,8 @@ export var contactsReducer = (state = [], action) => {
           return contact;
         }
       });
+    case 'LOGOUT':
+      return [];
     default:
       return state;
   }

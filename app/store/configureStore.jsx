@@ -1,13 +1,17 @@
-var redux = require('redux');
-var {searchTextReducer, contactsReducer} = require('reducers');
+import * as redux from 'redux';
+import thunk from 'redux-thunk';
+var {searchTextReducer, contactsReducer, modalFormReducer, authReducer} = require('reducers');
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     searchText: searchTextReducer,
-    contactsReducer: contactsReducer
+    contacts: contactsReducer,
+    modalForm: modalFormReducer,
+    auth: authReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(
+    redux.applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ));
 

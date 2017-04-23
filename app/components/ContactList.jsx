@@ -5,21 +5,20 @@ var ContactAPI = require('ContactAPI');
 
 var ContactList = React.createClass({
   render: function(){
-    var {contactsReducer, searchText} = this.props;
+    var {contacts, searchText} = this.props;
     var renderContacts = () => {
-      if (contactsReducer.length === 0){
+      if (contacts.length === 0){
         return (
           <h3>No contacts</h3>
         );
       }
 
-      return ContactAPI.filterContacts(contactsReducer, searchText).map((contact) => {
+      return ContactAPI.filterContacts(contacts, searchText).map((contact) => {
         return (
-          <Contact key={contact.id} {...contact}/>
+            <Contact key={contact.id} {...contact}/>
         )
       });
     }
-
   return (
     <div>
       {renderContacts()}

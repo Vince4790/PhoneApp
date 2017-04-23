@@ -1,33 +1,31 @@
 var React = require('react');
 var ReactDom = require('react-dom');
 var {Provider} = require('react-redux');
-var {Route, Router, IndexRoute, hashHistory} = require('react-router');
+var {hashHistory} = require('react-router');
 
-var PhoneBookApp = require('PhoneBookApp');
 var actions = require('actions');
 var store = require('configureStore').configure();
-var ContactAPI = require('ContactAPI');
+import firebase from 'app/firebase/';
+import router from 'app/router/';
+
+// Load bootstrap
 const bootstrap = require('bootstrap');
 require('bootstrap/dist/css/bootstrap.css');
 
-
-// Load foundation
-// $(document).foundation();
-//
-// // App css
-// require('style!css!sass!applicationStyles')
-
-store.subscribe(() => {
-  var state = store.getState();
-  console.log('New state:', state);
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddContacts());
+    hashHistory.push('/contacts');
+  } else {
+    store.dispatch(actions.logout());
+    hashHistory.push('/');
+  }
 });
-
-var initialContacts = ContactAPI.getContacts();
-store.dispatch(actions.addContacts(initialContacts));
 
 ReactDom.render(
   <Provider store={store}>
-    <PhoneBookApp/>
+    {router}
   </Provider>,
   document.getElementById('app')
 );
