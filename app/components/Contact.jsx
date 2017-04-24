@@ -27,12 +27,11 @@ var Contact = React.createClass({
   render: function(){
     var {name, number, checked} = this.props;
     return (
-        <div className="container text-center">
-          <div className="row">
-              <div className="col-sm-1 text-left">
-                <input type="checkbox" checked={checked} onClick={this.toggleCheck}/>
+          <div className="row col-md-offset-1">
+              <div className="contact-radio col-md-1 text-left">
+                <input type="radio" checked={checked} onClick={this.toggleCheck}/>
               </div>
-              <div className="col-md-6 text-center">
+              <div className="contact-panel col-md-6 text-center">
                 <div className="panel panel-default">
                   <div className="panel-heading">
                     <div className="row">
@@ -40,7 +39,6 @@ var Contact = React.createClass({
                     <div className="col-xs-8 text-left">
                       <b>{name}</b>
                     </div>
-                    <div className="row">
                     <div className="col-xs-1 text-right">
                       <a href="#" data-toggle="tooltip" title="Edit" onClick={this.handleEdit}>Edit</a>
                     </div>
@@ -48,14 +46,11 @@ var Contact = React.createClass({
                       <a href="#" data-toggle="tooltip" title="Remove" onClick={this.handleDelete}>Remove</a>
                     </div>
                     </div>
-                    </div>
                   </div>
                   <div className="panel-body text-left">{number}</div>
                 </div>
               </div>
           </div>
-
-        </div>
     )
   }
 });

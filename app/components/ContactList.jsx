@@ -9,7 +9,7 @@ var ContactList = React.createClass({
     var renderContacts = () => {
       if (contacts.length === 0){
         return (
-          <h3>No contacts</h3>
+          <h3 className="text-center">No contacts</h3>
         );
       }
 
@@ -20,7 +20,7 @@ var ContactList = React.createClass({
       });
     }
   return (
-    <div>
+    <div className="contact-list">
       {renderContacts()}
     </div>
   )

@@ -7,12 +7,16 @@ var actions = require('actions');
 var store = require('configureStore').configure();
 import firebase from 'app/firebase/';
 import router from 'app/router/';
-
 // Load bootstrap
 const bootstrap = require('bootstrap');
 require('bootstrap/dist/css/bootstrap.css');
+require('./scripts/form.js');
+require('./styles/base.css');
+
+
 
 firebase.auth().onAuthStateChanged((user) => {
+  console.log('Auth user changed');
   if (user) {
     store.dispatch(actions.login(user.uid));
     store.dispatch(actions.startAddContacts());

@@ -2,44 +2,69 @@ var React = require('react');
 import * as Redux from 'react-redux';
 import * as actions from 'actions';
 
+
 export var LoginForm = React.createClass({
-  onLoginWithGoogle() {
-    var {dispatch} = this.props;
-
-    dispatch(actions.startLogin());
-  },
-  onLoginWithEmailPassword() {
-    var {dispatch} = this.props;
-    var email = this.refs.email.value;
-    var password = this.refs.password.value;
-    console.log('Something', email, password);
-
-    dispatch(actions.loginWithEmailPassword('bao.hoang90@icloud.com', 'testpassword'));
-  },
   render: function(){
     return (
-      <div className="container">
-    <div className="row vertical-offset-100">
-    	<div className="col-md-4 col-md-offset-4">
-    		<div className="panel panel-default">
-			  	<div className="panel-heading">
-			    	<h3 className="panel-title">Please sign in</h3>
-			 	</div>
-			  	<div className="panel-body">
-			    	<form acceptCharset="UTF-8" role="form">
-			    	  	<div className="form-group">
-			    		    <input className="form-control" placeholder="E-mail" ref="email" name="email" type="email"/>
-			    		</div>
-			    		<div className="form-group">
-			    			<input className="form-control" placeholder="Password" ref="password" name="password" type="password"/>
-			    		</div>
-              <button type="submit" className="btn btn-lg btn-primary btn-block">Login</button>
-			      </form>
-			    </div>
+      <div className="container login-form">
+    	<div className="row">
+			<div className="col-md-6 col-md-offset-3">
+				<div className="panel panel-default panel-login">
+					<div className="panel-heading">
+						<div className="row">
+							<div className="col-xs-6">
+								<a href="#" className="active" id="login-form-link">Login</a>
+							</div>
+							<div className="col-xs-6">
+								<a href="#" id="register-form-link">Register</a>
+							</div>
+						</div>
+					</div>
+
+					<div className="panel-body">
+						<div className="row">
+							<div className="col-lg-12">
+								<form id="login-form" role="form">
+									<div className="form-group">
+										<input type="email" id="login-form-email" tabIndex="1" className="form-control" placeholder="Email Address"/>
+									</div>
+									<div className="form-group">
+										<input type="password" id="login-form-password" tabIndex="2" className="form-control" placeholder="Password"/>
+									</div>
+									<div className="form-group">
+										<div className="row">
+											<div className="col-sm-6 col-sm-offset-5">
+												<input type="submit" id="login-submit" tabIndex="4" className="btn btn-login btn-lg" value="Go"/>
+											</div>
+										</div>
+									</div>
+								</form>
+
+								<form id="register-form" role="form" style={{display: 'none'}}>
+									<div className="form-group">
+										<input type="email" id="register-form-email" tabIndex="1" className="form-control" placeholder="Email Address"/>
+									</div>
+									<div className="form-group">
+										<input type="password" id="register-form-password" tabIndex="2" className="form-control" placeholder="Password"/>
+									</div>
+									<div className="form-group">
+										<input type="password" id="register-form-confirm-password" tabIndex="2" className="form-control" placeholder="Confirm Password"/>
+									</div>
+									<div className="form-group">
+										<div className="row">
+											<div className="col-sm-6 col-sm-offset-5">
+												<input type="submit" id="register-submit" tabIndex="4" className="btn btn-register" value="Register Now"/>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
     );
   }
 });

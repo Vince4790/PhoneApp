@@ -28,10 +28,10 @@ var ContactSearch = React.createClass({
     var {dispatch, searchText} = this.props;
     return (
         <div className="container">
-                  <div className="row">
-                    <div className="col-xs-6">
+            <div className="row">
+              <div id="search-input" className="col-md-6 col-md-offset-1">
         <div className="input-group">
-          <span className="input-group-addon" id="basic-addon">Search</span>
+          <span className="input-group-addon">Search</span>
           <input type='search' className="form-control" ref="searchText"
             aria-described="basic-addon"
             placeholder={searchText} value={searchText}
@@ -41,17 +41,14 @@ var ContactSearch = React.createClass({
             }}/>
           </div>
         </div>
-        <div className="col-xs-4">
-        <div className="col-xs-3">
-            <div>
-              <button type="button" className="btn btn-info btn-md"
-                onClick={this.handleAdd}>
-                  Add
-              </button>
-
-            </div>
+        <div id="button-add" className="col-md-1">
+          <div className="col-md-6">
+          <button type="button" className="btn btn-info btn-md" onClick={this.handleAdd}>
+            Add
+          </button>
           </div>
-        <div className="col-xs-1">
+        </div>
+        <div id="button-remove" className="col-md-1">
             <div className="dropdown">
               <button className="btn btn-default dropdown-toggle" type="button" id="removeMenu"
                 data-toggle="dropdown">Remove
@@ -62,7 +59,6 @@ var ContactSearch = React.createClass({
                   <li><a href="#" onClick={this.handleDeleteAll}>Remove All</a></li>
                 </ul>
             </div>
-          </div>
           </div>
             </div>
           </div>

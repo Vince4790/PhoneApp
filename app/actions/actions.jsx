@@ -171,6 +171,17 @@ export var logout = () => {
   };
 };
 
+export var createUserWithEmailPassword = (email, password) => {
+  return (dispatch, getState) => {
+    firebase.auth().createUserWithEmailAndPassword(email,password).then((result) => {
+      console.log('Register worked!', result);
+    }, (error) => {
+      console.log('Unable to register', error.message);
+      alert(error.message);
+    });
+  }
+}
+
 export var loginWithEmailPassword = (email, password) => {
   return (dispatch, getState) => {
     console.log('Log with email');
@@ -178,16 +189,7 @@ export var loginWithEmailPassword = (email, password) => {
       console.log('Auth worked!', result);
     }, (error) => {
       console.log('Unable to auth', error);
-    });
-  };
-};
-
-export var startLogin = () => {
-  return (dispatch, getState) => {
-    return firebase.auth().signInWithPopup(provider).then((result) => {
-      console.log('Auth worked!', result);
-    }, (error) => {
-      console.log('Unable to auth', error);
+      alert(error.message);
     });
   };
 };
