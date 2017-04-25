@@ -1,13 +1,13 @@
 {
-  "name": "boilerplate",
+  "name": "PhoneApp",
   "version": "1.0.0",
   "description": "Simple react app",
   "main": "index.js",
   "scripts": {
-    "test": "karma start",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Andrew Mead",
+  "author": "Vince Hoang",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.9.1",
