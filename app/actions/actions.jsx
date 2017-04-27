@@ -116,7 +116,6 @@ export var startRemoveSelected = () => {
   return (dispatch, getState) => {
     var uid = getState().auth.uid;
     var contacts = getState().contacts;
-    console.log('Get state', getState());
     var filteredContacts = contacts.filter((contact) => {
       return contact.checked;
     });

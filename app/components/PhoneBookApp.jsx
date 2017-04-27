@@ -5,8 +5,8 @@ import Contact from 'Contact';
 import ContactSearch from 'ContactSearch';
 import ContactList from 'ContactList';
 import ModalForm from 'ModalForm';
+import ConfirmForm from 'ConfirmForm';
 import Nav from 'Nav';
-import Footer from 'Footer';
 
 export var PhoneBookApp = React.createClass({
   render: function(){
@@ -15,10 +15,9 @@ export var PhoneBookApp = React.createClass({
       <Nav/>
       <div className="container">
         <ModalForm/>
-        <ContactSearch/>
+        <ConfirmForm/>
         <ContactList/>
       </div>
-      <Footer/>
       </div>
     )
   }

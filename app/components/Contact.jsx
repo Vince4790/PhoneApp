@@ -6,8 +6,14 @@ var $ = require('jquery');
 var Contact = React.createClass({
   handleDelete: function(){
     var {id, name, number, dispatch} = this.props;
-    console.log(id, name, number);
-    dispatch(actions.startRemoveContact(id));
+    dispatch(actions.openModalForm({
+      actionType: 'REMOVE_CONTACT',
+      title: 'Are you sure you want to delete ?',
+      id: id,
+      name: name,
+      number: number
+    }));
+    $('#confirm-modal').modal('show');
   },
   handleEdit: function(){
     var {dispatch, id, name, number} = this.props;
@@ -27,11 +33,10 @@ var Contact = React.createClass({
   render: function(){
     var {name, number, checked} = this.props;
     return (
-          <div className="row col-md-offset-1">
-              <div className="contact-radio col-md-1 text-left">
-                <input type="radio" checked={checked} onClick={this.toggleCheck}/>
-              </div>
-              <div className="contact-panel col-md-6 text-center">
+          <div className="row">
+            <div className="contact-row">
+              <input type="checkbox" checked={checked} style={{float: 'left'}} onClick={this.toggleCheck}/>
+              <div className="contact-panel col-md-10">
                 <div className="panel panel-default">
                   <div className="panel-heading">
                     <div className="row">
@@ -47,8 +52,11 @@ var Contact = React.createClass({
                     </div>
                     </div>
                   </div>
-                  <div className="panel-body text-left">{number}</div>
+                  <div className="panel-body text-left">
+                    <label>Phone: </label>{number}
+                  </div>
                 </div>
+              </div>
               </div>
           </div>
     )

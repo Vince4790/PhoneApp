@@ -1,25 +1,47 @@
 var React = require('react');
 var {connect} = require('react-redux');
 var actions = require('actions');
+var validator = require('validator');
 var $ = require('jquery');
 
 var ModalForm = React.createClass({
-  handeSubmitModal: function(e){
+  showErrorNameInput: function(){
+    $('#name-form-group').addClass('has-error has-feedback');
+    $('#input-name').after("<div class='error-message' style='color:red'>Please enter valid name</div>");
+  },
+  showErrorNumberInput: function(){
+    $('#number-form-group').addClass('has-error has-feedback');
+    $('#input-number').after("<div class='error-message' style='color:red'>Please enter only digits</div>")
+  },
+  handleSubmitModal: function(e){
     e.preventDefault();
     var {actionType, id} = this.props.modalForm;
-    var {dispatch} = this.props;
-    if (actionType === 'ADD_CONTACT'){
-      dispatch(actions.startAddContact({
-        name: this.refs.name.value,
-        number: this.refs.number.value,
-        checked: false
-      }));
-    } else if (actionType === 'UPDATE_CONTACT'){
-      dispatch(actions.startUpdateContact({
-        id, id,
-        name: this.refs.name.value,
-        number: this.refs.number.value
-      }));
+    var name = this.refs.name.value;
+    var number = this.refs.number.value;
+    var passedValidateName = validator.validateString(name);
+    var passedValidateNumber = validator.validateNumber(number);
+    if (!passedValidateName){
+      this.showErrorNameInput();
+    }
+    if (!passedValidateNumber){
+      this.showErrorNumberInput();
+    }
+    if (passedValidateNumber && passedValidateName){
+      var {dispatch} = this.props;
+      if (actionType === 'ADD_CONTACT'){
+        dispatch(actions.startAddContact({
+          name: name,
+          number: number,
+          checked: false
+        }));
+      } else if (actionType === 'UPDATE_CONTACT'){
+        dispatch(actions.startUpdateContact({
+          id, id,
+          name: name,
+          number: number
+        }));
+      }
+      $('#contact-modal').modal('hide');
     }
   },
   render: function(){
@@ -35,24 +57,42 @@ var ModalForm = React.createClass({
 <h4 className="modal-title">{modalForm.title}</h4>
 </div>
 <div className="modal-body">
-  <form className="form-horizontal" role="form">
-                    <div className="form-group">
-                      <label  className="col-sm-2 control-label">Name</label>
+  <form id="modal-form" className="form-horizontal" role="form">
+                    <div id="name-form-group" className="form-group">
+                      <label htmlFor="inputName" className="col-sm-2 control-label">Name</label>
                               <div className="col-sm-10">
-                          <input type="text" className="form-control" ref="name"
-                          placeholder="Enter name" value={modalForm.name} onChange={()=>{
+                          <input id="input-name" type="text" data-minlength="2" className="form-control input-name" ref="name"
+                          placeholder="Enter name" value={modalForm.name}
+                          onBlur={() => {
+                            if (!validator.validateString(this.refs.name.value)){
+                              this.showErrorNameInput();
+                            } else {
+                              $('#name-form-group').removeClass('has-error has-feedback');
+                              $('#input-name').next('.error-message').remove();
+                            }
+                          }}
+                          onChange={()=>{
                             dispatch(actions.openModalForm({
                               ...modalForm,
                               name: this.refs.name.value
                             }));
-                          }}/>
+                          }} required/>
                       </div>
                     </div>
-                    <div className="form-group">
+                    <div id="number-form-group" className="form-group">
                       <label className="col-sm-2 control-label">Number</label>
                           <div className="col-sm-10">
-                          <input type="text" className="form-control" ref="number"
-                            placeholder="Enter number" value={modalForm.number} onChange={()=>{
+                          <input id="input-number" type="text" className="form-control" ref="number"
+                            placeholder="Enter number" value={modalForm.number}
+                            onBlur={() => {
+                              if (!validator.validateNumber(this.refs.number.value)){
+                                this.showErrorNumberInput();
+                              } else {
+                                $('#number-form-group').removeClass('has-error has-feedback');
+                                $('#input-number').next('.error-message').remove();
+                              }
+                            }}
+                            onChange={()=>{
                               dispatch(actions.openModalForm({
                                 ...modalForm,
                                 number: this.refs.number.value
@@ -60,11 +100,11 @@ var ModalForm = React.createClass({
                             }}/>
                       </div>
                     </div>
-                  </form>
+    </form>
 </div>
 <div className="modal-footer">
 <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-<button type="button" className="btn btn-primary" data-dismiss="modal" onClick={this.handeSubmitModal}>Save</button>
+<button id="submit-button" type="submit" className="btn btn-primary" onClick={this.handleSubmitModal}>Save</button>
 </div>
 </div>
 

@@ -9,13 +9,12 @@ body {
   border-right: 5px;
 }
 #button-remove {
-  position: relative;
-  left: -30px;
-  padding-left: 0px;
+
 }
 #search-input {
   padding-right: 0;
 }
+
 .login-form {
   padding-top: 120px;
 }
@@ -24,15 +23,17 @@ body {
   padding-top: 20px;
 }
 
+.contact-row {
+  margin-left: 20px;
+}
+
 .contact-radio {
   position: relative;
   left: 5px;
   padding-right: 0px;
 }
 .contact-panel {
-  position: relative;
-  left: -50px;
-  padding-left: 0px;
+  margin-left: 10px
 }
 
 .panel-login {

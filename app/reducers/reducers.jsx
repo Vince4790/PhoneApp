@@ -54,7 +54,6 @@ export var contactsReducer = (state = [], action) => {
     case 'REMOVE_ALL':
       return [];
     case 'UPDATE_CONTACT': {
-      console.log('Inside reducer',action.contact);
       return state.map((contact) => {
         if (contact.id === action.contact.id){
           return {
