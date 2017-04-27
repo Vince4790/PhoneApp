@@ -33,6 +33,16 @@ module.exports = {
       return searchText.length === 0 || name.indexOf(searchText) > -1 || number.indexOf(searchText) > -1;
     });
 
+    filteredContacts.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      } else if (a.name > b.name) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
     return filteredContacts;
   }
 };

@@ -5,13 +5,23 @@ var validator = require('validator');
 var $ = require('jquery');
 
 var ModalForm = React.createClass({
+  cleanUpErrorMessage: function(){
+    $('#name-form-group').removeClass('has-error has-feedback');
+    $('#input-name').next('.error-message').remove();
+    $('#number-form-group').removeClass('has-error has-feedback');
+    $('#input-number').next('.error-message').remove();
+  },
   showErrorNameInput: function(){
     $('#name-form-group').addClass('has-error has-feedback');
-    $('#input-name').after("<div class='error-message' style='color:red'>Please enter valid name</div>");
+    if ($('#input-name').next('.error-message').length === 0){
+      $('#input-name').after("<div class='error-message' style='color:red'>Please enter valid name</div>");
+    }
   },
   showErrorNumberInput: function(){
     $('#number-form-group').addClass('has-error has-feedback');
-    $('#input-number').after("<div class='error-message' style='color:red'>Please enter only digits</div>")
+    if ($('#input-number').next('.error-message').length === 0){
+      $('#input-number').after("<div class='error-message' style='color:red'>Please enter only digits</div>");
+    }
   },
   handleSubmitModal: function(e){
     e.preventDefault();
@@ -48,12 +58,12 @@ var ModalForm = React.createClass({
     var {modalForm, dispatch} = this.props;
     var name,number;
     return (
-      <div id="contact-modal" className="modal fade" role="dialog">
+      <div id="contact-modal" className="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
 <div className="modal-dialog">
 
 <div className="modal-content">
 <div className="modal-header">
-<button type="button" className="close" data-dismiss="modal">&times;</button>
+<button type="button" className="close" data-dismiss="modal" onClick={this.cleanUpErrorMessage}>&times;</button>
 <h4 className="modal-title">{modalForm.title}</h4>
 </div>
 <div className="modal-body">
@@ -103,7 +113,7 @@ var ModalForm = React.createClass({
     </form>
 </div>
 <div className="modal-footer">
-<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+<button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.cleanUpErrorMessage}>Close</button>
 <button id="submit-button" type="submit" className="btn btn-primary" onClick={this.handleSubmitModal}>Save</button>
 </div>
 </div>
