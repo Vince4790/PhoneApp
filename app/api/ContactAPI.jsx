@@ -24,7 +24,7 @@ module.exports = {
       return 0;
     }
   },
-  filterContacts: function(contacts,searchText){
+  filterContacts: function(contacts,searchText,sort){
     var filteredContacts = contacts;
 
     filteredContacts = filteredContacts.filter((contact) => {
@@ -33,7 +33,13 @@ module.exports = {
       return searchText.length === 0 || name.indexOf(searchText) > -1 || number.indexOf(searchText) > -1;
     });
 
-    filteredContacts.sort(this.sortByNameAsc);
+    if (sort === 'SORT_NAME_ASC'){
+      filteredContacts.sort(this.sortByNameAsc);
+
+    } else if (sort === 'SORT_NAME_DESC'){
+      filteredContacts.sort(this.sortByNameDesc);
+
+    }
 
     return filteredContacts;
   }

@@ -13,11 +13,11 @@ export var PhoneBookApp = React.createClass({
     return (
       <div>
       <Nav/>
-      <div className="container">
+      <section>
         <ModalForm/>
         <ConfirmForm/>
         <ContactList/>
-      </div>
+      </section>
       </div>
     )
   }

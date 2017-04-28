@@ -1,5 +1,32 @@
+html {
+    height: 100%;
+}
+
 body {
-    background-color: lightgray;
+  background-color: #e6e6e6;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+section { width: 90%;
+    margin: 0px auto;
+    height: 90%
+}
+
+/*hr {
+  width: 80%;
+  margin-left: 10px;
+}*/
+
+article {
+    font-family: 'Open Sans', sans-serif;
+    float: left;
+    margin: 5% 2% 10% 2%;
+    padding: 0px;
+    background-color: white;
+    width: 60%;
+    height: 100%;
 }
 
 #button-add {

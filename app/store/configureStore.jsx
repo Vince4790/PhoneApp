@@ -1,13 +1,14 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
-var {searchTextReducer, contactsReducer, modalFormReducer, authReducer} = require('reducers');
+var {searchTextReducer, contactsReducer, modalFormReducer, authReducer, sortReducer} = require('reducers');
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
     searchText: searchTextReducer,
     contacts: contactsReducer,
     modalForm: modalFormReducer,
-    auth: authReducer
+    auth: authReducer,
+    sort: sortReducer
   });
 
   var store = redux.createStore(reducer, initialState, redux.compose(

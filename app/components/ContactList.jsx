@@ -33,8 +33,8 @@ var ContactList = React.createClass({
       $('#confirm-modal').modal('show');
     },
   render: function(){
-    var {contacts, searchText, dispatch} = this.props;
-    var filtered = ContactAPI.filterContacts(contacts, searchText);
+    var {contacts, searchText, dispatch, sort} = this.props;
+    var filtered = ContactAPI.filterContacts(contacts, searchText, sort);
     var renderContacts = () => {
       if (contacts.length === 0){
         return (
@@ -49,8 +49,7 @@ var ContactList = React.createClass({
       });
     }
   return (
-    <div className="panel panel-default contact-list" style={{width: '60%'}}>
-        <div className="panel-body">
+    <article>
           <div style={{marginLeft:'40px'}}><h4>{filtered.length} contact(s) found</h4></div>
             <div className="row">
               <div style={{marginLeft:'40px', marginRight: '70px'}} className="col-sm-7 col-md-7">
@@ -59,7 +58,7 @@ var ContactList = React.createClass({
                     <span id="sort-span" className="glyphicon glyphicon-triangle-top"></span> Name
                   </button>
               </div>
-              <div id="button-remove" className="col-sm-1 col-md-1 dropdown" style={{marginLeft:'15px'}}>
+              <div id="button-remove" className="col-sm-1 col-md-1 dropdown" style={{marginLeft:'40px'}}>
                 <button className="btn btn-default dropdown-toggle" type="button" id="removeMenu"
                   data-toggle="dropdown">
                   <span className="glyphicon glyphicon-trash"></span>
@@ -72,8 +71,7 @@ var ContactList = React.createClass({
           </div>
           <hr/>
           {renderContacts()}
-        </div>
-    </div>
+    </article>
   )
   }
 });
