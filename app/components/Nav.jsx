@@ -4,6 +4,17 @@ import * as actions from 'actions';
 require('bootstrap-validator');
 
 export var Nav = React.createClass({
+  handleKeyPress: function(e){
+    e.preventDefault();
+    var {dispatch} = this.props;
+    if (e.key === 'Enter'){
+      var searchText = this.refs.searchText.value;
+      dispatch(actions.setSearchText(searchText));
+    } else {
+      var input = $('#nav-bar-search').val();
+      $('#nav-bar-search').val(input+e.key);
+    }
+  },
   handleAdd: function(e) {
     e.preventDefault();
     var {dispatch} = this.props;
@@ -18,7 +29,7 @@ export var Nav = React.createClass({
     dispatch(actions.startLogout());
   },
   render: function(){
-    var {dispatch} = this.props;
+    var {dispatch, searchText} = this.props;
     return (
       <nav className="navbar navbar-default">
   <div className="container-fluid">
@@ -32,7 +43,8 @@ export var Nav = React.createClass({
         <li>
           <form className="navbar-form navbar-left">
             <div className="form-group">
-              <input type="text" ref="searchText" className="form-control" placeholder="Search"/>
+              <input id="nav-bar-search" type="text" ref="searchText" className="form-control" placeholder="Search"
+                onKeyPress={this.handleKeyPress}/>
             </div>
             <button type="button" className="btn btn-default glyphicon glyphicon-search"
               onClick={() => {

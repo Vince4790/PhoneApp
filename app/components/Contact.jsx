@@ -41,13 +41,13 @@ var Contact = React.createClass({
                   <div className="panel-heading">
                     <div className="row">
 
-                    <div className="col-xs-8 text-left">
+                    <div className="col-md-9 text-left">
                       <b>{name}</b>
                     </div>
-                    <div className="col-xs-1 text-right">
+                    <div className="col-md-1 text-right">
                       <a href="#" data-toggle="tooltip" title="Edit" onClick={this.handleEdit}>Edit</a>
                     </div>
-                    <div className="col-xs-1 text-right">
+                    <div className="col-md-1 text-right">
                       <a href="#" data-toggle="tooltip" title="Remove" onClick={this.handleDelete}>Remove</a>
                     </div>
                     </div>

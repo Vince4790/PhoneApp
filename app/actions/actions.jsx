@@ -102,14 +102,12 @@ export var removeContact = (id) => {
 };
 
 export var sortByNameAsc = () => {
-  console.log('ASC');
   return {
     type: 'SORT_NAME_ASC'
   };
 };
 
 export var sortByNameDesc = () => {
-  console.log('DESC');
   return {
     type: 'SORT_NAME_DESC'
   };

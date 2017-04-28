@@ -28,9 +28,10 @@ module.exports = {
     var filteredContacts = contacts;
 
     filteredContacts = filteredContacts.filter((contact) => {
-      var name = contact.name.toLowerCase();
-      var number = contact.number.toLowerCase();
-      return searchText.length === 0 || name.indexOf(searchText) > -1 || number.indexOf(searchText) > -1;
+      var nameLowerCase = contact.name.toLowerCase();
+      var number = contact.number;
+      return searchText.length === 0 || nameLowerCase.indexOf(searchText) > -1 || number.indexOf(searchText) > -1
+              || contact.name.indexOf(searchText) > -1;
     });
 
     if (sort === 'SORT_NAME_ASC'){
