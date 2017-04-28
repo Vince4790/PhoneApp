@@ -6,23 +6,23 @@ module.exports = {
       return contacts;
     }
   },
-  getContacts: function(){
-    var contacts = [
-      {
-        id: 1,
-        name:'Vince',
-        number: '123-456-789',
-        checked: false
-      },
-      {
-        id: 2,
-        name: 'Mike',
-        number: '123-323-869',
-        checked: false
-      }
-    ];
-
-    return $.isArray(contacts) ? contacts : [];
+  sortByNameAsc: function(a,b){
+    if (a.name < b.name) {
+      return -1;
+    } else if (a.name > b.name) {
+      return 1;
+    } else {
+      return 0;
+    }
+  },
+  sortByNameDesc: function(a,b){
+    if (a.name > b.name) {
+      return -1;
+    } else if (a.name < b.name) {
+      return 1;
+    } else {
+      return 0;
+    }
   },
   filterContacts: function(contacts,searchText){
     var filteredContacts = contacts;
@@ -33,15 +33,7 @@ module.exports = {
       return searchText.length === 0 || name.indexOf(searchText) > -1 || number.indexOf(searchText) > -1;
     });
 
-    filteredContacts.sort((a, b) => {
-      if (a.name < b.name) {
-        return -1;
-      } else if (a.name > b.name) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    filteredContacts.sort(this.sortByNameAsc);
 
     return filteredContacts;
   }

@@ -101,6 +101,18 @@ export var removeContact = (id) => {
   };
 };
 
+export var sortByNameAsc = () => {
+  return {
+    type: 'SORT_NAME_ASC'
+  };
+};
+
+export var sortByNameDesc = () => {
+  return {
+    type: 'SORT_NAME_DESC'
+  };
+};
+
 export var startRemoveAll = () => {
   return (dispatch, getState) => {
     var uid = getState().auth.uid;

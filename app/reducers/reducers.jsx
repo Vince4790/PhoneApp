@@ -1,4 +1,6 @@
 var uuid = require('node-uuid');
+var ContactAPI = require('ContactAPI');
+
 export var searchTextReducer = (state = '', action) => {
   switch (action.type){
     case 'SET_SEARCH_TEXT':
@@ -68,6 +70,16 @@ export var contactsReducer = (state = [], action) => {
       return state.filter((contact) => {
         return !contact.checked;
       });
+    case 'SORT_NAME_ASC':
+      state.sort(ContactAPI.sortByNameAsc);
+      return [
+        ...state
+      ];
+    case 'SORT_NAME_DESC':
+      state.sort(ContactAPI.sortByNameDesc);
+      return [
+        ...state
+      ];
     case 'TOGGLE_CHECK':
       return state.map((contact) => {
         if (contact.id === action.id){
